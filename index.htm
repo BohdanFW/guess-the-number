@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body{
+    margin:0;
+    background:#222;
+    text-align:center;
+    color:#fff;
+}
+h1,h2{
+    font-family:'Patua One';
+    font-weight:400;
+    margin:0;
+}
+.grid{
+    background:#222;
+    display:flex;
+    width:100vw;
+    height:100vw;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:6px 0;
+    font-family:arial;
+    font-weight:600;
+}
+.grid div{
+    width:9%;
+    height:9%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0066ff;
+    font-size:12px;
+    margin:1px;
+    border-radius:5px;
+    transition:background .2s linear;
+}
+.restart{
+    margin-top: 10px;
+    font-family:'Patua One';
+    font-size:26px;
+    padding: 10px 14px;
+    background: #333;
+    border-radius:8px;
+    display:inline-block;
+}
+.link{
+    margin-top: 10px;
+    font-family:'Patua One';
+    font-size:26px;
+    padding: 10px 14px;
+    border-radius:8px;
+    display:inline-block;
+}
+    </style>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+        <title>Page Title</title>
+    </head>
+    <body>
+        <h1><span id="headline">0</span></h1>
+        <h2><span id="rec"></span></h2>
+        <h2>Your attempts: <span id="att">0</span></h2>
+        <h2>Remaining attempts: <span id="ratt">10</span></h2>
+        <div class="grid"></div>
+        <div class="restart">Restart</span></div>
+        <form>
+        <a class="link" href="https://www.sololearn.com/compiler-playground/WZLWDmU3MC7N" target="_blank">Show code</span></a>
+        </form>
+    </body>
+    <script>
+        attempts = 0; //Переменная для хранения количества использованных попыток
+coins = 0; //Переменная для хранения щета етого раунда
+flag1 = 3; //Флажок для Отключения кнопок ввода
+record = 0;
+$("document").ready(function (){
+ $("#headline").html("GUESS THE NUMBER"); //Выводит текст GUESS THE NUMBER
+ number = Math.floor(Math.random()*99)+1;
+ for(i=1; i<=100; i++){
+  $(".grid").append("<div>"+i+"</div>");
+ }
+
+ $(".grid div").click(function(){
+	 
+     if(flag1==0){
+	 openFullscreen();
+         if(attempts<10){
+             ++attempts;
+             $("#att").html(attempts);
+             $("#ratt").html(10-attempts);
+             dnum = $(this).text();
+                 if(dnum<number){
+                     for(i=1; i<=dnum; i++){
+                         $(".grid div:nth-child("+i+")").css("background","#2f2f2f");
+                     }  
+                 }
+             else if(dnum>number){
+                 for(i=100; i>=dnum; i--){
+                     $(".grid div:nth-child("+i+")").css("background","#2f2f2f");
+                 }
+             }
+             else if(dnum==number){
+                 flag1=1;
+                 $(this).css("background","green");
+                 alert("Congratulations! You guessed the number with "+attempts+" attempts");
+                 coins = coins+10-attempts;
+                 if(coins==1){
+                     $("#headline").html("You have "+coins+" coin"); //Выводит заработаные баллы, вместо GUESS THE NUMBER
+                 }
+                 else{
+                     $("#headline").html("You have "+coins+" coins"); //Выводит заработаные баллы, вместо GUESS THE NUMBER
+                 }
+             }
+         }
+             else{
+             flag1 = 2;
+             coins = coins+10-attempts;
+             alert("You have used all attempts. Your result is " +coins);
+             if(coins>record){
+                 alert("Congratulations! You just broke your record!👑 By " +(coins-record)+ " points!");
+                 record = coins;
+                 $("#rec").html("Your record: " +record+ "👑"); //Выводит на экран рекорд
+             }
+             var result = confirm("Do you want to play more?");
+                  if(result)  {
+                      coins=0;
+                      again();
+                  } else {
+                      window. close();
+                  }
+             }
+     }
+     else {
+		 if(flag1==2){
+             coins=0;
+             $("#headline").html("You have "+coins+" coins"); //Выводит заработаные баллы, вместо GUESS THE NUMBER
+         }
+         again();
+     }
+     
+ });
+ $(".restart").click(function(){
+     if(attempts>0){
+         var result = confirm("The result will not be saved. Are you sure you want to start over?");
+              if(result)  {
+                  coins=0;
+                  again();
+              } else {
+
+              }
+     }
+ });
+ function again(){
+	   openFullscreen();
+       attempts = 0;
+       $("#att").html(attempts);
+       $("#ratt").html(10);
+       number = Math.floor(Math.random()*99)+1;
+       for(i=1; i<=100; i++){
+           $(".grid div").css("background","#0066ff");
+           flag1=0;
+       }    
+ }
+ var elem = document.documentElement;
+function openFullscreen() {
+if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if 
+(elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+});
+</script>
+</html>
