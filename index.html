@@ -355,7 +355,7 @@
                  flag1 = 0;     //Отключаем клавиатуру
                  $("#message_text1").html("You have used all attempts. Your result is "+coins); // Вписывает в поле message_text1 "You have used all attempts. Your result is" и в конце добавляет баллы
                  if(coins>record){ //если рекорд выводим:
-                     $("#message_text2").html("Congratulations! You just broke your record!👑 By " +(coins-record)+ " points! <hr>"); // Вписывает в поле message_text2 "Congratulations! You just broke your record!?? By " и в конце вставляет баллы - рекорд
+                     $("#message_text2").html("Congratulations! You just broke your record!&#128081; By " +(coins-record)+ " points! <hr>"); // Вписывает в поле message_text2 "Congratulations! You just broke your record!👑 By " и в конце вставляет баллы - рекорд
                      $("#message_text3").html("Let's set another record, shall we?");   // Вписывает Let's set another record, shall we? в поле message_text3
                      if (testmode==0){  //Если тестовый режим выключен:
                          record = coins;  //Обновляем рекорд
@@ -440,7 +440,7 @@
             $("#rec").html("The answer is: "+number); //Выводим загаданое число
         }
         else{        //Иначе выводим рекорд:
-            $("#rec").html("Your record: " +record+ "??"); //Выводит на экран новый рекорд
+            $("#rec").html("Your record: " +record+ "&#128081;"); //Выводит на экран новый рекорд
         }
         
            
