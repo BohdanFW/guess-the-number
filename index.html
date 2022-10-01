@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    /*------ CSS §Ü§à§Õ §Õ§Ý§ñ §ã§ä§â§Ñ§ß§Ú§è§í ------*/
+        body{
+            margin:0 auto;
+            background:#222;
+            text-align:center;
+            color:#fff;
+            width: 400px;
+            justify-content: center;
+        }
+        h1,h2{
+            font-family:'Patua One';
+            font-weight:400;
+            margin:0;
+        }
+        .grid{
+            background:#222;
+            display:flex;
+            height:400px;
+            flex-wrap:wrap;
+            justify-content:center;
+            margin:6px 0;
+            font-family:arial;
+            font-weight:600;
+        }
+        .grid div{
+            width:9%;
+            height:9%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#0066ff;
+            font-size:12px;
+            margin:1px;
+            border-radius:5px;
+            transition:background .2s linear;
+        }
+        .restart{
+            margin-top: 10px;
+            font-family:'Patua One';
+            font-size:26px;
+            padding: 10px 14px;
+            background: #333;
+            border-radius:8px;
+            display:inline-block;
+        }
+        .testmode{
+            margin-top: 10px;
+            font-family:'Patua One';
+            font-size:26px;
+            padding: 10px 14px;
+            background: #333;
+            border-radius:8px;
+            display:inline-block;
+        }
+        .link{
+            margin-top: 10px;
+            font-family:'Patua One';
+            font-size:26px;
+            padding: 10px 14px;
+            border-radius:8px;
+            display:inline-block;
+        }
+        /*------ CSS §Ü§à§Õ §Õ§Ý§ñ §à§Ü§ß§Ñ §ã§à§à§Ò§ë§Ö§ß§Ú§Û ------*/
+        button{
+            cursor:pointer;
+        }
+        .login{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:50%;
+            background:#2156f3;
+            color:white;
+            padding:15px;
+            border-radius:10px;
+            border:none;
+            outline:none;
+        }
+        .modal{
+            position: absolute;
+            top: -200%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgb(104, 104, 104); //§¢§í§Ó§ê§Ú§Û §è§Ó§Ö§ä (50,2,10)
+            width: 80%;
+            height: 80%;
+            padding: 10px 15px 10px;
+            color: white;
+            border-radius: 5px;
+            transition: 1s ease-out;
+        }
+        .modal1{
+            position: absolute;
+            top: -200%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgb(104, 104, 104); //§¢§í§Ó§ê§Ú§Û §è§Ó§Ö§ä (50,2,10)
+            width: 80%;
+            height: 80%;
+            padding: 10px 15px 10px;
+            color: white;
+            border-radius: 5px;
+            transition: 1s ease-out;
+        }
+        .header{
+            font-size: 20px;
+            text-align: center;
+        }
+        .header span{
+            position: absolute;
+            top: 0;
+            right:0;
+            padding: 5px 10px;
+            font-size: 30px;
+            font-weight: bolder;
+            color: white;
+            cursor: pointer;
+        }
+        .body{
+            margin: 10px 0;
+            font-weight: bold;
+            position: relative;
+        }
+        .body input{
+            min-width: 20%;
+            width: 95%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 5px 0;
+        }
+        .body input[type=submit]{
+            width: 30%;
+            background: #2196f3;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            transform: translateX(120%);
+            cursor: pointer;
+        }
+        .footer{
+            margin: 10px;
+        }
+        .footer button{
+            position: relative;
+            background-color: rgba(33, 150, 243); //(255,50,90,.9);
+            border: none;
+            width: 50%;
+            left: 50%;
+            transform:translateX(-100%);
+            padding: 10px;
+            margin: 0 20px 20px;
+            border-radius: 5px;
+            color: white;
+        }
+        @media screen and (max-width:768px){
+            .modal{
+                width:85%;
+                height:auto;
+            }
+            .modal1{
+                width:85%;
+                height:auto;
+            }
+        }
+        /*------ CSS §Ü§à§Õ §Õ§Ý§ñ slider ------*/
+        .container{ 
+            width:100%;   
+        }
+        .slider-box{
+            position:relative;
+            height:10px;
+            top:0;
+            left:0;
+        }
+        .slider{
+            position:relative;
+            width:100%;
+            -webkit-appearance:none;
+            height:10px;
+            border-radius:8px;
+            z-index:2;
+            background-color:transparent;
+        }
+        .bar{
+            position:absolute;
+            height:10px;
+            background-color: #162940;    
+            left:5px;
+            border-radius:8px;
+            right:5px;
+            top:7px;
+            z-index:1;
+            overflow:hidden;
+        }
+        .bar .filled{
+            display:block;
+            height:inherit;
+            background-color:#ed5565;
+        }
+        .slider::-webkit-slider-thumb{
+            width:20px;
+            height:20px;
+            background-color:tomato;
+           -webkit-appearance:none;
+            border-radius:50%;
+            z-index:3;
+        }
+        .value{
+            margin-top:20px;
+            color:rgb(218, 249, 251);
+            font-weight:bold;
+            text-align:center;
+            font-family:'Patua One';
+            font-size: 25px;
+        }
+  </style>
+
+  <head>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME</title>
+    <link rel="icon" href="https://github.com/BohdanFW/guess-the-number/raw/c58b6f5e6107601f77f073901a96ff404c8e1e8e/gfg_200X200.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css"> </head>
+
+  <body>
+    <h1><span id="headline"></span></h1>
+    <h2><span id="rec"></span></h2>
+    <h2>Your attempts: <span id="att">Press on Restart??</span></h2>
+    <h2>Remaining attempts: <span id="ratt">Press on Restart??</span></h2>
+    <div class="grid"></div>
+    <div class="restart">Restart</span>
+    </div>
+    <div class="testmode">TestMode</span>
+    </div>
+    <form> <a class="link" href="https://github.com/BohdanFW/guess-the-number/blob/main/index.htm" target="_blank">Show code</span></a> </form>
+    <!----------- §°§Ü§ß§à §Ó§í§Ó§à§Õ§Ñ §ã§à§à§Ò§ë§Ö§ß§Ú§Û ----------->
+    <div class="modal" id="mymodal">
+      <div class="header">
+        <h2 id="message_text1"></h2>
+        <hr>
+        <h2 id="message_text2"></h2>
+        <h2 id="message_text3"></h2> <span id="x" class="Close" onclick="x()">  </span> </div>
+      <div class="footer"> <button class="Close" onclick="okey();"> Yes </button> </div>
+    </div>
+    <!---------------------------------------------->
+    <!------------- §°§Ü§ß§à §Ó§í§Ò§à§â§Ñ §å§â§à§Ó§ß§ñ ------------->
+    <div class="modal1" id="mymodal1">
+      <div class="header">
+        <h2 id="slider_text1"></h2>
+        <h2 id="slider_text2"></h2>
+        <h2 id="slider_text3"></h2>
+      </div>
+      <!-- §¬§à§Õ §ã§Ý§Ñ§Û§Õ§Ö§â§Ñ -->
+      <div class="container">
+        <div class="slider-box"> <span class="bar">
+        <span class="filled"></span> </span> <input class="slider" type="range" min=1 max=6 value="2"> </div>
+        <div class="value">Easy</div>
+      </div>
+      <!--..............-->
+      <div class="footer"> <button class="Close" onclick="sliderbtn();"> Yes </button> </div>
+    </div>
+    <!---------------------------------------------->
+  </body>
+  <script>
+    // JS §Ü§à§Õ ------- ¡ý      
+    //----------------- §°§Ò§ñ§Ó§Ý§ñ§ð §Ô§Ý§à§Ò§Ñ§Ý§î§ß§í§Ö §á§Ö§â§Ö§Þ§Ö§ß§ß§í§Ö -----------------//
+    var attempts = 0; //§±§Ö§â§Ö§Þ§Ö§ß§ß§Ñ§ñ §Õ§Ý§ñ §ç§â§Ñ§ß§Ö§ß§Ú§ñ §Ü§à§Ý§Ú§é§Ö§ã§ä§Ó§Ñ §Ú§ã§á§à§Ý§î§Ù§à§Ó§Ñ§ß§ß§í§ç §á§à§á§í§ä§à§Ü
+    var coins = 0; //§±§Ö§â§Ö§Þ§Ö§ß§ß§Ñ§ñ §Õ§Ý§ñ §ç§â§Ñ§ß§Ö§ß§Ú§ñ §ë§Ö§ä§Ñ §Ö§ä§à§Ô§à §â§Ñ§å§ß§Õ§Ñ
+    
+    var levelname = ['Noob', 'Easy', 'Normal', 'Hard', 'Expert', 'Pro'];//§®§Ñ§ã§Ú§Ó §ß§Ñ§Ù§Ó§Ñ§ß§Ú§Û §å§â§à§Ó§ß§Ö§Û
+    var levelpoints = [12,      15,      20,      27,      36,      47];//§®§Ñ§ã§Ú§Ó §Ò§Ñ§Ý§à§Ó §Ù§Ñ §å§â§à§Ó§ß§Ú
+    var level //§±§Ö§â§Ö§Þ§Ö§ß§ß§Ñ§ñ §Õ§Ý§ñ §ç§â§Ñ§ß§Ö§ß§Ú§ñ §å§â§à§Ó§ß§ñ §Ó §é§Ú§ã§Ý§à§Ó§à§Þ §æ§à§â§Þ§Ñ§ä§Ö 1...6
+    var record = 0; //§±§Ö§â§Ö§Þ§Ö§ß§ß§Ñ§ñ §Õ§Ý§ñ §ç§â§Ñ§ß§Ö§ß§Ú§ñ §â§Ö§Ü§à§â§Õ§Ñ
+    var flag1 = 0;  //§¶§Ý§Ñ§Ø§à§Ü §Õ§Ý§ñ §°§ä§Ü§Ý§ð§é§Ö§ß§Ú§ñ §Ü§ß§à§á§à§Ü §Ó§Ó§à§Õ§Ñ
+                        //§Ö§ã§Ý§Ú 1 §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§Ñ §Ó§Ü§Ý§ð§é§Ö§ß§Ñ
+                        //§Ö§ã§Ý§Ú 0 §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§Ñ §Ó§í§Ü§Ý§ð§é§Ö§ß§Ñ
+    var btnstat = 1;//§±§Ö§â§Ö§Þ§Ö§ß§ß§Ñ§ñ §á§à§Ü§Ñ§Ù§å§ð§ë§Ñ§ñ §æ§å§ß§Ü§è§í§ð §Ü§ß§à§á§Ü§Ú "YES" §Ó §Õ§Ñ§ß§ß§í§Û
+                        //§Ö§ã§Ý§Ú 0 §Ü§ß§à§á§Ü§Ñ §ã§Ò§â§Ñ§ã§í§Ó§Ñ§Ö§ä §Ú§Ô§â§å
+                        //§Ö§ã§Ý§Ú 1 §Ü§ß§à§á§Ü§Ñ §à§ä§Ü§â§í§Ó§Ñ§Ö§ä §à§Ü§ß§à §ã §Ó§í§Ò§à§â§à§Þ §ã§Ý§à§Ø§ß§à§ã§ä§Ú
+    var testmode = 0;//§¶§Ý§Ñ§Ø§à§Ü §ä§Ö§ã§ä§à§Ó§à§Ô§à §â§Ö§Ø§í§Þ§Ñ
+                        //§Ö§ã§Ý§Ú 0 §Ü§ß§à§á§Ü§Ñ §ã§Ò§â§Ñ§ã§í§Ó§Ñ§Ö§ä §Ú§Ô§â§å
+                        //§Ö§ã§Ý§Ú 1 §Ü§ß§à§á§Ü§Ñ §à§ä§Ü§â§í§Ó§Ñ§Ö§ä §à§Ü§ß§à §ã §Ó§í§Ò§à§â§à§Þ §ã§Ý§à§Ø§ß§à§ã§ä§Ú
+    var slidermessage = "Choose the level of difficulty <hr>" //§±§Ö§â§Ö§Þ§Ö§ß§ß§Ñ§ñ §Õ§Ý§ñ §ç§â§Ñ§ß§Ö§ß§Ú§ñ §ä§Ö§Ü§ã§ä§Ñ §Ó §ã§à§à§Ò§ë§Ö§ß§Ú§Ú §ã§Ý§Ñ§Û§Õ§Ö§â§Ñ
+    var slider = document.querySelector(".slider");
+    var filled = document.querySelector(".filled");
+    var field = document.querySelector(".value");
+    //------------------------------------------------------------------//
+    
+    
+    //----------------------- §°§ã§ß§à§Ó§ß§à§Û §Ü§à§Õ §Ú§Ô§â§í -----------------------//
+    $("document").ready(function (){                 //§±§â§Ú §Ù§Ñ§Ô§â§å§Ù§Ü§Ö:
+        if (($(window).width())<400){                //§±§â§à§Ó§Ö§â§Ú§ä§î §â§Ñ§Ù§Þ§Ö§â §Ö§Ü§â§Ñ§ß§Ñ
+            $("body").css("width",$(window).width());//§¦§ã§Ý§Ú §Þ§Ö§ß§î§ê§Ö 400, §å§Þ§Ö§ß§î§ê§Ú§ä§î §á§à§Õ §à§Ü§ß§à
+            $(".grid").css("height",$(window).width());
+        }
+        
+        $("#headline").html("GUESS THE NUMBER");     //§£§í§Ó§à§Õ§Ú§ä §ä§Ö§Ü§ã§ä GUESS THE NUMBER
+        number = Math.floor(Math.random()*99)+1;     //§¤§Ö§ß§Ö§â§Ú§â§å§Ö§Þ §ã§Ý§å§é§Ñ§Û§ß§à§Ö §é§Ú§ã§Ý§à §Ú §Ù§Ñ§á§Ú§ã§í§Ó§Ñ§Ö§Þ §Ö§Ô§à §Ó §á§Ö§â§Ö§Þ§Ö§ß§ß§å§ð
+        for(i=1; i<=100; i++){                       //§³ §á§à§Þ§à§ë§ð §è§í§Ü§Ý§Ñ for §Ô§Ö§ß§Ö§â§Ú§â§å§Ö§Þ §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§å §à§ä 0 §Õ§à 100
+            $(".grid").append("<div>"+i+"</div>"); 
+        }
+        filled.style.width= (slider.value-1)*20+"%"; //§Þ§Ö§ß§ñ§Ö§Þ §ã§ä§Ú§Ý§î slider §ß§Ñ §Ñ§Ü§ä§å§Ñ§Ý§î§ß§í§Û
+        level = slider.value;                        // §³§ß§Ú§Þ§Ñ§Ö§Þ §á§à§Ü§Ñ§Ù§Ñ§ß§Ú§Ö §ã slider, §Ú §Ù§Ñ§á§Ú§ã§í§Ó§Ñ§Ö§Þ §Ó level
+        //§¬§à§Õ §Õ§Ý§ñ §Ù§Ñ§á§Ú§ã§Ú §ä§Ö§Ü§ã§ä§Ñ §Ó §à§Ü§ß§à §ã§à§à§Ò§ë§Ö§ß§Ú§ñ¡ý
+        $("#message_text1").html("Welcome to guess the number game!");
+        $("#message_text2").html("I will guess the number, and you need to guess it. Be careful, you have only 7 attempts in one round! But don't worry, I'll tell you which way to guess.<hr>");
+        $("#message_text3").html("Let's start?");
+        modal();                                     //§©§Ñ§á§å§ã§Ü§Ñ§Ö§Þ §æ§å§ß§Ü§è§í§ð §Ó§í§Õ§Ó§Ú§Ô§Ñ§ß§Ú§ñ §à§Ü§ß§Ñ §ã§à§à§Ò§ë§Ö§ß§Ú§ñ
+    
+    
+     $(".grid div").click(function(){               //§¦§ã§Ý§Ú §ß§Ñ §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§å §ß§Ñ§Ø§Ñ§Ý§Ú
+    	 
+         if(flag1==1){                              //§¦§ã§Ý§Ú §æ§Ý§Ñ§Ø§à§Ü 1 (§Ö§ã§Ý§Ú §â§Ö§Ø§Ú§Þ §å§Ô§Ñ§Õ§í§Ó§Ñ§ß§Ú§ñ)
+    	 openFullscreen();
+             if(attempts<(7-level)){                //§¦§ã§Ý§Ú §á§à§á§í§ä§Ü§Ú §ß§Ö §Ù§Ñ§Ü§à§ß§é§Ú§Ý§Ú§ã§î
+                 ++attempts;
+                 $("#att").html(attempts);
+                 $("#ratt").html((7-level)-attempts);
+                 dnum = $(this).text();
+                     if(dnum<number){               //§¦§ã§Ý§Ú §ß§Ñ§Ø§Ñ§ä§à§Ö §é§Ú§ã§Ý§à §Þ§Ö§ß§î§ê§Ö §Ù§Ñ§Ô§Ñ§Õ§Ñ§ß§à§Ô§à:
+                         for(i=1; i<=dnum; i++){    //§³ §á§à§Þ§à§ë§å §è§í§Ü§Ý§Ñ for, §á§Ö§â§Ö§Ü§â§Ñ§ê§í§Ó§Ñ§Ö§Þ §ß§Ö§Ó§Ö§â§ß§í§Ö §Ü§ß§à§á§Ü§Ú §Ó "§é§Ö§â§ß§í§Û" 
+                             $(".grid div:nth-child("+i+")").css("background","#2f2f2f");
+                         }  
+                     }
+                 else if(dnum>number){              //§¦§ã§Ý§Ú §ß§Ñ§Ø§Ñ§ä§à§Ö §é§Ú§ã§Ý§à §Ò§à§Ý§î§ê§Ö §Ù§Ñ§Ô§Ñ§Õ§Ñ§ß§à§Ô§à:
+                     for(i=100; i>=dnum; i--){      //§³ §á§à§Þ§à§ë§å §è§í§Ü§Ý§Ñ for, §á§Ö§â§Ö§Ü§â§Ñ§ê§í§Ó§Ñ§Ö§Þ §ß§Ö§Ó§Ö§â§ß§í§Ö §Ü§ß§à§á§Ü§Ú §Ó "§é§Ö§â§ß§í§Û" 
+                         $(".grid div:nth-child("+i+")").css("background","#2f2f2f");
+                     }
+                 }
+                 else if(dnum==number){                //§¦§ã§Ý§Ú §å§Ô§Ñ§Õ§Ñ§Ý§Ú:
+                     flag1=0;                          //§°§ä§Ü§Ý§ð§é§Ñ§Ö§Þ §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§å
+                     $(this).css("background","green");//§á§Ö§â§Ö§Ü§â§Ñ§ê§í§Ó§Ñ§Ö§Þ §Ü§ß§à§á§Ü§å §Ó §Ù§Ö§Ý§Ö§ß§í§Û
+                     //§£§í§Ó§à§Õ§Ú§Þ §ã§à§à§Ò§ë§Ö§ß§Ú§Ö:
+                     $("#message_text1").html("Congratulations! You guessed the number with "+attempts+" attempts");
+                     $("#message_text2").html("Play more?");
+                     $("#message_text3").html("");
+                     modal(); //§£§í§Õ§Ó§Ú§ß§å§ä§î §à§Ü§ß§à
+                     coins = coins+(levelpoints[level-1]/(7-level)*(7-level-attempts+1));//§»§Ú§ä§Ñ§Ö§Þ §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Ò§Ñ§Ý§Ý§í
+                     if(coins==1){  // §¦§ã§Ý§Ú §Þ§à§ß§Ö§ä§Ñ 1 §Ó§í§Ó§à§Õ§Ú§Þ coin 
+                         $("#headline").html("You have "+coins+" coin"); //§£§í§Ó§à§Õ§Ú§ä §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Ò§Ñ§Ý§Ý§í, §Ó§Þ§Ö§ã§ä§à GUESS THE NUMBER
+                     }
+                     else{         // §ª§ß§Ñ§é§Ö coins
+                         $("#headline").html("You have "+coins+" coins"); //§£§í§Ó§à§Õ§Ú§ä §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Ò§Ñ§Ý§Ý§í, §Ó§Þ§Ö§ã§ä§à GUESS THE NUMBER
+                     }
+                 }
+             }
+                 else{          //§ª§ß§Ñ§é§Ö, §ä§à§Ú§ã§ä§î §Ü§à§Ô§Õ§Ñ §á§à§á§í§ä§Ü§Ú §Ù§Ñ§Ü§à§ß§é§Ú§Ý§Ú§ã§î:
+                 flag1 = 0;     //§°§ä§Ü§Ý§ð§é§Ñ§Ö§Þ §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§å
+                 $("#message_text1").html("You have used all attempts. Your result is "+coins); // §£§á§Ú§ã§í§Ó§Ñ§Ö§ä §Ó §á§à§Ý§Ö message_text1 "You have used all attempts. Your result is" §Ú §Ó §Ü§à§ß§è§Ö §Õ§à§Ò§Ñ§Ó§Ý§ñ§Ö§ä §Ò§Ñ§Ý§Ý§í
+                 if(coins>record){ //§Ö§ã§Ý§Ú §â§Ö§Ü§à§â§Õ §Ó§í§Ó§à§Õ§Ú§Þ:
+                     $("#message_text2").html("Congratulations! You just broke your record!?? By " +(coins-record)+ " points! <hr>"); // §£§á§Ú§ã§í§Ó§Ñ§Ö§ä §Ó §á§à§Ý§Ö message_text2 "Congratulations! You just broke your record!?? By " §Ú §Ó §Ü§à§ß§è§Ö §Ó§ã§ä§Ñ§Ó§Ý§ñ§Ö§ä §Ò§Ñ§Ý§Ý§í - §â§Ö§Ü§à§â§Õ
+                     $("#message_text3").html("Let's set another record, shall we?");   // §£§á§Ú§ã§í§Ó§Ñ§Ö§ä Let's set another record, shall we? §Ó §á§à§Ý§Ö message_text3
+                     if (testmode==0){  //§¦§ã§Ý§Ú §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§Ú§Þ §Ó§í§Ü§Ý§ð§é§Ö§ß:
+                         record = coins;  //§°§Ò§ß§à§Ó§Ý§ñ§Ö§Þ §â§Ö§Ü§à§â§Õ
+                     }
+                 }
+                 else{ //§ª§ß§Ñ§é§Ö §Ó§í§Ó§à§Õ§Ú§Þ §Ö§ä§à:
+                     $("#message_text2").html("");
+                     $("#message_text3").html("Do you want to play more?");
+                 }
+                 modal();  // §°§Ò§â§Ñ§ë§Ñ§Ö§Þ§ã§ñ §Ü §æ§å§ß§Ü§è§Ú§Ú §Ó§í§Õ§Ó§Ú§Ô§Ñ§ß§Ú§ñ §à§Ü§ß§Ñ §ã§à§à§Ò§ë§Ö§ß§Ú§ñ
+                 $("#headline").html("You have "+coins+" coins"); //§£§í§Ó§à§Õ§Ú§ä §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Ò§Ñ§Ý§Ý§í, §Ó§Þ§Ö§ã§ä§à GUESS THE NUMBER
+                 
+                 if (coins==0 && level!=1){ //§¦§ã§Ý§Ú §ß§Ö§ä §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§ß§í§ç §Ò§Ñ§Ý§Ý§à§Ó §Ú §å§â§à§Ó§Ö§ß§î §ß§Ö §Þ§Ú§ß§Ú§Þ§Ñ§Ý§î§ß§í§Û
+                     $("#slider_text1").html(" <hr>");//§±§â§Ö§Õ§Ý§à§Ø§Ú§ä§î §Ú§Ù§Þ§Ö§ß§Ú§ä§î §å§â§à§Ó§Ö§ß§î
+                     slidermessage = "Maybe it's difficult for you? Do you want to change the level? <hr>"
+                     btnstat=1; //§µ§ã§ä§Ñ§ß§Ñ§Ó§Ý§Ú§Ó§Ñ§Ö§Þ §â§Ö§Ø§í§Þ §Ü§ß§à§á§Ü§Ú §ß§Ñ §à§ä§Ü§â§í§ä§Ú§Ö §à§Ü§ß§Ñ §Ó§í§Ò§à§â§Ñ §ã§Ý§à§Ø§ß§à§ã§ä§Ú
+                 }
+                 coins=0; //§°§Ò§ß§à§Ó§Ý§ñ§Ö§Þ §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Þ§à§ß§Ö§ä§í
+                 setTimeout(function(){ $("#headline").html("You have "+coins+" coins"); }, 1000); //§£§í§Ó§à§Õ§Ú§Þ §Ò§Ñ§Ý§Ý§í §ã §Ù§Ñ§Õ§Ö§â§Ø§Ü§à§Û §Ó 1 §Þ§Ú§ß.
+                 
+                 }
+         }
+    
+    
+     });
+     //-------------- §°§Ò§â§Ñ§Ò§à§ä§é§Ú§Ü§Ú §ß§Ñ§Ø§Ñ§ä§Ú§Û --------------//
+     $(".restart").click(function(){                          //§¬§à§Ô§Õ§Ñ §ß§Ñ§Ø§Ñ§ä§à §Ü§ß§à§á§Ü§å "Restart":
+         if(flag1==1){                                        //§¦§ã§Ý§Ú §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§Ñ §Ó§Ü§Ý§ð§é§Ö§ß§Ñ:
+         slidermessage = "Choose the level of difficulty <hr>"//§ª§Ù§Þ§Ö§ß§ñ§Ö§Þ §ã§à§à§Ò§ë§Ö§ß§Ú§Ö §ß§Ñ "Choose the level of difficulty "
+         btnstat=1;                                           //§µ§ã§ä§Ñ§ß§Ñ§Ó§Ý§Ú§Ó§Ñ§Ö§Þ §Ù§ß§Ñ§é§Ö§ß§Ú§Ö btnstat - 1 §Õ§Ý§ñ §à§ä§Ü§â§í§ä§Ú§ñ §à§Ü§ß§Ñ §ã §Ó§í§Ò§à§â§à§Þ §ã§Ý§à§Ø§ß§à§ã§ä§Ú
+         okey();                                              //§©§Ñ§á§å§ã§Ü§Ñ§Ö§Þ §æ§å§ß§Ü§è§í§ð §à§ä§Ü§â§í§ä§Ú§ñ §à§Ü§ß§Ñ
+         }
+     });
+        $(".testmode").click(function(){                      //§¬§à§Ô§Õ§Ñ §ß§Ñ§Ø§Ñ§ä§à §Ü§ß§à§á§Ü§å "TestMode":
+            if(flag1==1){                                     //§¦§ã§Ý§Ú §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§Ñ §Ó§Ü§Ý§ð§é§Ö§ß§Ñ:
+                if (testmode){                                //§¦§ã§Ý§Ú §Ó§Ü§Ý§ð§é§Ö§ß §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§í§Þ:
+                    setTimeout(function(){ $(".testmode").css("background","#333"); }, 200);//§±§Ö§â§Ö§Ü§â§Ñ§ê§í§Ó§Ñ§Ö§Þ §Ü§ß§à§á§Ü§å §Ó §ã§Ö§â§í§Û §ã §Ù§Ñ§Õ§Ö§â§Ø§Ü§à§Û §Ó 200 §Þ§ã.
+                    testmode=0;                               //§£§í§Ü§Ý§ð§é§Ñ§Ö§Þ §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§í§Þ
+                    coins=0;                                  //§°§Ò§ß§å§Ý§ñ§Ö§Þ §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Ò§Ñ§Ý§Ý§í
+                    $("#headline").html("You have "+coins+" coins"); //§£§í§Ó§à§Õ§Ú§Þ §Ò§Ñ§Ý§Ý§í
+                    again();                                  //§©§Ñ§á§å§ã§Ü§Ñ§Ö§Þ §æ§å§ß§Ü§è§í§ð §ã§Ò§â§à§ã§Ñ §Ú§Ô§â§í
+                }
+                else{                                         //§ª§ß§Ñ§é§Ö (§Ö§ã§Ý§Ú §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§í§Þ §Ó§í§Ü§Ý§ð§é§Ö§ß):
+                    setTimeout(function(){ $(".testmode").css("background","#ffee00"); }, 200);//§±§à§Õ§à§Ø§Õ§Ñ§ä§î 200 §Þ§ã. §Ú §á§Ö§â§Ö§Ü§Ñ§ã§Ú§ä§î §Ü§ß§à§á§Ü§å §Ó §Ø§Ö§Ý§ä§í§Û
+                    testmode=1;                               //§£§Ü§Ý§ð§é§Ú§ä§î §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§Ú§Þ
+                    //- §ª§Ù§Þ§Ö§ß§ñ§Ö§Þ §ä§Ö§Ü§ã§ä §ã§à§à§Ò§ë§Ö§ß§Ú§ñ -//
+                    $("#message_text1").html("Test mode only for program test! At the top of the window you will see a hidden number. If you don't want to enable test mode, press &times;");
+                    $("#message_text2").html("");
+                    $("#message_text3").html("");
+                    $("#x").html("&times;"); //§±§à§Ü§Ñ§Ù§í§Ó§Ñ§Ö§Þ §Ü§ß§à§á§Ü§å §Ù§Ñ§Ü§â§í§ä§î §Õ§Ý§ñ §ã§à§à§Ò§ë§Ö§ß§Ú§ñ
+                    modal();     //§£§í§Õ§Ó§Ú§ß§å§ä§î §ã§à§à§Ò§ë§Ö§ß§Ú§Ö
+                }
+            }
+        })
+    });
+    //-------------------------------------------------//
+    //------------------------------------------------------------------//
+    
+    //---------------------------- §¶§å§ß§ß§Ü§è§Ú§Ú ----------------------------//
+    //§¶§å§ß§Ü§è§í§ñ §ß§Ñ§Ø§Ñ§ä§Ú§ñ §ß§Ñ §·
+    function x(){
+        if (testmode==1){                            //§¦§ã§Ý§Ú §Ó§Ü§Ý§ð§é§Ö§ß §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§í§Þ:
+            $(".testmode").css("background","#333"); //§±§Ö§â§Ö§Ü§â§Ñ§ã§Ú§ä§î §Ü§ß§à§á§Ü§å §à§Ò§â§Ñ§ä§ß§à §Ó §ã§Ö§â§í§Û
+            testmode=0;                              //§£§Ö§â§ß§å§ä§î §á§Ö§â§Ö§Þ§Ö§ß§ß§å§ð testmode §Ó §á§â§Ö§Ø§ß§Õ§ß§Ú§Û §â§Ö§Ø§í§Þ
+        }
+        $("#x").html("");        //§³§Ü§â§í§ä§î §Ü§ß§à§á§Ü§å "§Ù§Ñ§Ü§â§í§ä§î"
+        modalClose();            //§£§í§Ù§í§Ó§Ñ§Ö§Þ §æ§å§ß§Ü§è§í§ð §Ù§Ñ§Ü§â§í§ä§Ú§ñ §à§Ü§ß§Ñ §ã§à§à§Ò§ë§Ö§ß§Ú§Û
+    }
+    
+    // §¶§å§ß§Ü§è§í§ñ §Õ§Ý§ñ §à§é§Ú§ë§Ö§ß§Ú§ñ §á§à§Ý§ñ (§Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§í) §Ú §Ù§Ñ§Ô§Ñ§Õ§í§Ó§Ñ§ß§Ú§ñ §ß§à§Ó§à§Ô§à §é§Ú§ã§Ý§Ñ
+     function again(){                              //        §°§á§Ú§ã§Ñ§ß§Ú§Ö §Ü§à§Þ§Ñ§ß§Õ:
+    	openFullscreen();                        //§°§Ò§â§Ñ§ë§Ñ§Ö§Þ§ã§ñ §Ü §æ§å§ß§Ü§è§Ú§Ú §Õ§Ý§ñ §à§ä§Ü§â§í§ä§Ú§ñ §ã§ä§â§Ñ§ß§Ú§è§í §Ó§à §Ó§Ö§ã§î §Ö§Ü§â§Ñ§ß
+        attempts = 0;                            //§³§Ò§â§Ñ§ã§í§Ó§Ñ§Ö§Þ §ë§Ö§ä §Ö§ä§à§Ô§à §â§Ñ§å§ß§Õ§Ñ
+        $("#att").html(attempts);                //§£§í§Ó§à§Õ§Ú§Þ §ë§Ö§ä §Ö§ä§à§Ô§à §â§Ñ§å§ß§Õ§Ñ(0 §Ó §Õ§Ñ§ß§ß§à§Þ §ã§Ý§å§é§Ñ§Ö)
+        $("#ratt").html(7-level);                //§£§í§Ó§à§Õ§Ú§Þ §Ü§à§Ý§Ú§é§Ö§ã§ä§Ó§à §á§à§á§í§ä§à§Ü §Ü§à§ä§à§â§à§Ö §Õ§Ñ§Ö§ä§ã§ñ §ß§Ñ §â§Ñ§å§ß§Õ 
+        number = Math.floor(Math.random()*99)+1; //§¤§Ö§ß§Ö§â§Ú§â§å§Ö§Þ §ã§Ý§å§é§Ñ§Ö §é§Ú§ã§Ý§à (§Ù§Ñ§á§Ú§ã§í§Ó§Ñ§Ö§Þ §Ö§Ô§à §Ó number)
+        for(i=1; i<=100; i++){                   //§¸§í§Ü§Ý for §Ó§í§á§à§Ý§ß§ñ§Ö§ä§ã§ñ 100 §â§Ñ§Ù
+            $(".grid div").css("background","#0066ff"); //§°§Ü§â§Ñ§ê§å§Ö§Þ §Ü§Ñ§Ø§Õ§å§ð §Ü§ß§à§á§Ü§å §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§í §Ó §ã§Ú§ß§Ú§Û
+        }   
+        flag1=1; //§µ§ã§ä§Ñ§ß§Ñ§Ó§Ý§Ú§Ó§Ñ§Ö§Þ §¶§Ý§Ñ§Ø§à§Ü §ß§Ñ 0 §Õ§Ý§ñ §Ñ§Ü§ä§Ú§Ó§Ñ§è§Ú§Ú §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§í
+        if(testmode){ //§¦§ã§Ý§Ú §Ó§Ü§Ý§ð§é§Ö§ß §ä§Ö§ã§ä§à§Ó§í§Û §â§Ö§Ø§í§Þ:
+            $("#rec").html("The answer is: "+number); //§£§í§Ó§à§Õ§Ú§Þ §Ù§Ñ§Ô§Ñ§Õ§Ñ§ß§à§Ö §é§Ú§ã§Ý§à
+        }
+        else{        //§ª§ß§Ñ§é§Ö §Ó§í§Ó§à§Õ§Ú§Þ §â§Ö§Ü§à§â§Õ:
+            $("#rec").html("Your record: " +record+ "??"); //§£§í§Ó§à§Õ§Ú§ä §ß§Ñ §ï§Ü§â§Ñ§ß §ß§à§Ó§í§Û §â§Ö§Ü§à§â§Õ
+        }
+        
+           
+     }
+     //§¶§å§ß§Ü§è§í§ñ okey() §ã§â§Ñ§Ò§Ñ§ä§í§Ó§Ñ§Ö§ä §á§à§ã§Ý§Ö §ß§Ñ§Ø§Ñ§ä§Ú§ñ §ß§Ñ §Ü§ß§à§á§Ü§å YES §ß§Ñ §à§Ü§ß§Ö §ã§à§à§Ò§ë§Ö§ß§Ú§Û
+    function okey(){
+        if(btnstat==1){ //§¦§ã§Ý§Ú §â§Ö§Ø§í§Þ §ã§â§Ñ§Ò§Ñ§ä§í§Ó§Ñ§ß§Ú§ñ §Ü§ß§à§á§Ü§Ú = 1:
+            modalClose() //§©§Ñ§Ü§â§í§Ó§Ñ§Ö§Þ §à§Ü§ß§à §Ó§í§Ó§à§Õ§Ñ §ã§à§à§Ò§ë§Ö§ß§Ú§Û
+            $("#slider_text1").html(slidermessage); //§ª§Ù§Þ§Ö§ß§Ú§ä§î §ä§Ö§Ü§ã§ä §ß§Ñ §à§Ü§ß§Ö slider
+            setTimeout(function(){ modal1(); }, 600);//§±§à§Õ§à§Ø§Õ§Ñ§ä§î 600 §Þ§Ú§Ý§Ú§ã§Ö§Ü§å§ß§Õ §Ú §Ó§í§Õ§Ó§Ú§ß§å§ä§î §à§Ü§ß§à §ã slider
+            btnstat=0; //§ª§Ù§Þ§Ö§ß§Ú§ä§î §â§Ö§Ø§í§Þ §ã§â§Ñ§Ò§Ñ§ä§í§Ó§Ñ§ß§Ú§ñ §Ü§ß§à§á§Ü§Ú §ß§Ñ §á§â§à§ã§ä§à§Ö §Ù§Ñ§Ü§â§í§ä§Ú§Ö §à§Ü§ß§Ñ
+        }
+        else if(btnstat==0){ //§ª§ß§Ñ§é§Ö, §Ö§ã§Ý§Ú §â§Ö§Ø§í§Þ §ã§â§Ñ§Ò§Ñ§ä§í§Ó§Ñ§ß§Ú§ñ §Ü§ß§à§á§Ü§Ú = 0:
+            again();         //§£§í§Ù§í§Ó§Ñ§Ö§Þ §æ§å§ß§Ü§è§í§ð §ã§Ò§â§à§ã§Ñ §â§Ñ§å§ß§Õ§Ñ
+            modalClose();    //§©§Ñ§Ü§â§í§Ó§Ñ§Ö§Þ §à§Ü§ß§à
+        }
+    }
+    
+    //§¶§å§ß§Ü§è§í§ñ sliderbtn() §ã§â§Ñ§Ò§Ñ§ä§í§Ó§Ñ§Ö§ä §á§à§ã§Ý§Ö §ß§Ñ§Ø§Ñ§ä§Ú§ñ §Ü§ß§à§á§Ü§Ú YES §ß§Ñ §à§Ü§ß§Ö §Ó§í§Ò§à§â§Ñ §å§â§à§Ó§ß§ñ
+    function sliderbtn(){  //      §°§á§Ú§ã§Ñ§ß§Ú§Ö §Ü§à§Þ§Ñ§ß§Õ
+        coins=0;           // §°§Ò§ß§å§Ý§ñ§Ö§Þ §Ù§Ñ§â§Ñ§Ò§à§ä§Ñ§ß§í§Ö §Ò§Ñ§Ý§Ý§í
+        modal1Close();     //§©§Ñ§Ü§â§í§Ó§Ñ§Ö§Þ §à§Ü§ß§à §Ó§í§Ò§à§â§Ñ §å§â§à§Ó§ß§ñ
+        again();           //§©§Ñ§á§å§ã§Ü§Ñ§Ö§Þ §æ§å§ß§Ü§è§í§ð again, §Õ§Ý§ñ §ã§Ò§â§à§ã§Ñ §Ú§Ô§â§í §Ú §Ó§Ü§Ý§ð§é§Ö§ß§Ú§ñ §Ü§Ý§Ñ§Ó§Ú§Ñ§ä§å§â§í
+    }
+    
+    //§¶§å§ß§Ü§è§í§ñ §Õ§Ý§ñ §à§ä§Ü§â§í§ä§Ú§ñ §à§Ü§ß§Ñ §Ó§à §Ó§Ö§ã§î §Ö§Ü§â§Ñ§ß
+     var elem = document.documentElement;
+    function openFullscreen() {
+        if (($(window).width())<400){                //§±§â§à§Ó§Ö§â§Ú§ä§î §â§Ñ§Ù§Þ§Ö§â §Ö§Ü§â§Ñ§ß§Ñ
+            $("body").css("width",$(window).width());//§¦§ã§Ý§Ú §Þ§Ö§ß§î§ê§Ö 400, §å§Þ§Ö§ß§î§ê§Ú§ä§î §á§à§Õ §à§Ü§ß§à
+            $(".grid").css("height",$(window).width());
+        }else{                                       //§ª§ß§Ñ§é§Ö §Ó§í§ã§ä§Ñ§Ó§Ú§ä§î 400
+            $("body").css("width",400);
+            $(".grid").css("height",400);
+        }
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if 
+            (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+      }
+    }
+    
+    // +++++++++   §¶§å§ß§Ü§è§Ú§Ú §ã§à§à§Ò§ë§Ö§ß§Ú§Û¡ý   +++++++++++++++
+    
+    var login = document.getElementsByClassName('login')[0];
+    var closeIcon = document.getElementsByClassName('Close')[0];
+    var closeBtn = document.getElementsByClassName('Close')[1];
+    function modal() {
+        var modal = document.getElementsByClassName('modal')[0];
+        modal.style.top = "0";
+    }
+    function modal1() {
+        var modal1 = document.getElementsByClassName('modal1')[0];
+        modal1.style.top = "0";
+    }
+    function modalClose() {
+        var modal = document.getElementsByClassName('modal')[0];
+        modal.style.top = "-200%";
+    }
+    function modal1Close() {
+        var modal1 = document.getElementsByClassName('modal1')[0];
+        modal1.style.top = "-200%";
+    }           
+    slider.oninput = function(){
+        level = slider.value;
+        field.innerText = levelname[level-1];
+        filled.style.width=(level-1)*20 +"%";
+    }
+    //----------------------------------------------
+  </script>
+
+</html>
