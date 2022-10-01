@@ -316,10 +316,10 @@
     
     
      $(".grid div").click(function(){               //Если на клавиатуру нажали
-    	 window.navigator.vibrate(10);               // Вибрировать 10ms
          if(flag1==1){                              //Если флажок 1 (если режим угадывания)
     	     openFullscreen();
              if(attempts<(7-level)){                //Если попытки не закончились
+    	           window.navigator.vibrate(80);               // Вибрировать 80ms
                  ++attempts;
                  $("#att").html(attempts);
                  $("#ratt").html((7-level)-attempts);
@@ -335,6 +335,7 @@
                      }
                  }
                  else if(dnum==number){                //Если угадали:
+    	               window.navigator.vibrate(100);               // Вибрировать 100ms
                      flag1=0;                          //Отключаем клавиатуру
                      $(this).css("background","green");//перекрашываем кнопку в зеленый
                      //Выводим сообщение:
@@ -352,6 +353,7 @@
                  }
              }
                  else{          //Иначе, тоисть когда попытки закончились:
+    	           window.navigator.vibrate(150);               // Вибрировать 150ms
                  flag1 = 0;     //Отключаем клавиатуру
                  $("#message_text1").html("You have used all attempts. Your result is "+coins); // Вписывает в поле message_text1 "You have used all attempts. Your result is" и в конце добавляет баллы
                  if(coins>record){ //если рекорд выводим:
