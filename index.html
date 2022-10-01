@@ -316,9 +316,9 @@
     
     
      $(".grid div").click(function(){               //Если на клавиатуру нажали
-    	 
+    	 window.navigator.vibrate(100);               // Вибрировать 200ms
          if(flag1==1){                              //Если флажок 1 (если режим угадывания)
-    	 openFullscreen();
+    	     openFullscreen();
              if(attempts<(7-level)){                //Если попытки не закончились
                  ++attempts;
                  $("#att").html(attempts);
